@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: botgauge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: botgauge
+  template:
+    metadata:
+      labels:
+        app: botgauge
+    spec:
+      containers:
+      - name: botgauge
+        image: ayushnihal220/botgauge-app:latest
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /hello
+            port: 8080
+        livenessProbe:
+          httpGet:
+            path: /hello
+            port: 8080
+                      
